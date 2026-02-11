@@ -68,13 +68,7 @@ class Config:
         if secret_name and region:
             aws_utils = AwsUtils(
                 region_name=region,
-                aws_endpoint_url=aws_endpoint,
-                identity_pool_id=identity_pool_id,
-                user_pool_id=user_pool_id,
-                client_id=client_id,
-                client_secret=client_secret,
-                cognito_username=cognito_username,
-                cognito_password=cognito_password,
+                aws_endpoint_url=aws_endpoint
             )
             try:
                 chamber_of_secrets = aws_utils.get_secrets(secret_name)
@@ -82,5 +76,6 @@ class Config:
             except Exception:
                 # Fall back to env vars
                 return Config._load_env_vars()
+
 
         return Config._load_env_vars()
